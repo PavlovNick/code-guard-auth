@@ -16,7 +16,7 @@ Follow these steps to successfully deploy the project on your local computer.
 To get started, clone the project from the GitHub repository. Open a terminal and run the following command:
 
 ```bash
-https://github.com/PavlovNick/code-guard-auth.git
+git clone https://github.com/PavlovNick/code-guard-auth.git
 ```
 
 ### 2. Creating the database
