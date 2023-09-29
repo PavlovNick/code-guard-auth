@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+    nginx:
+      image: nginx:stable-alpine
+      volumes:
+        - ./docker/config/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+        - ./src:/var/www/project
+      ports:
+          - '8089:80'
+      depends_on:
+        - php
+    php:
+      build:
+        context: docker/dockerfiles
+        dockerfile: php.Dockerfile
+      volumes:
+        - ./src:/var/www/project
+    mysql:
+      image: mysql:8.0
+      ports:
+        - '3316:3306'
+
