@@ -15,6 +15,7 @@ src/auth.json
 src/npm-debug.log
 src/yarn-error.log
 src/.fleet
+mysql/
 /.idea
 /.vscode
 src/_ide_helper.php

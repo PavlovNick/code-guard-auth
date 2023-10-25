@@ -3,21 +3,33 @@ version: '3.8'
 services:
     nginx:
       image: nginx:stable-alpine
+      container_name: nginx
       volumes:
         - ./docker/config/nginx.conf:/etc/nginx/conf.d/default.conf:ro
         - ./src:/var/www/project
       ports:
-          - '8089:80'
+          - '8088:80'
       depends_on:
         - php
+        - mysql
     php:
       build:
-        context: docker/dockerfiles
+        context: ./docker/dockerfiles
         dockerfile: php.Dockerfile
+      container_name: php
       volumes:
         - ./src:/var/www/project
     mysql:
       image: mysql:8.0
+      container_name: mysql
+      restart: unless-stopped
+      volumes:
+        - ./mysql:/var/lib/mysql
       ports:
         - '3316:3306'
+      environment:
+        - MYSQL_DATABASE=code_guard_auth_db
+        - MYSQL_ROOT_PASSWORD=kolua123
+      command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+
 
